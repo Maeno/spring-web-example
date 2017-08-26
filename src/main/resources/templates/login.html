@@ -10,4 +10,35 @@
         <script src="http://cdn.jsdelivr.net/webjars/jquery/3.2.1/jquery.min.js"
                 th:src="@{/webjars/jquery/3.2.1/jquery.min.js}"></script>
     </head>
+    <body>
+        <div class="container" style="margin: 50px">
+            <div class="text-center"><h1>Spring Web Example Login</h1></div>
+
+            <form th:action="@{login}" method="post">
+
+                <div class="form-group" th:if="${session['SPRING_SECURITY_LAST_EXCEPTION']} != null">
+                    <p class="form-control-static text-danger"
+                       th:text="${session['SPRING_SECURITY_LAST_EXCEPTION'].message}"></p>
+                </div>
+
+                <div class="form-group">
+                    <label for="companyId">CompanyId: </label>
+                    <input type="text" class="form-control" id="companyId" name="companyId" placeholder="1000" autofocus="true"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="employeeId">EmployeeId: </label>
+                    <input type="text" class="form-control" id="employeeId" name="employeeId" placeholder="2000"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password: </label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="TIGER"/>
+                </div>
+
+                <input type="submit" class="btn btn-success" value="Login"/>
+
+            </form>
+        </div>
+    </body>
 </html>
