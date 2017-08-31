@@ -14,7 +14,15 @@ import java.util.Arrays;
 @Aspect
 public class TraceLogAspect {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private Logger logger;
+
+    public TraceLogAspect() {
+        this.logger = LoggerFactory.getLogger(this.getClass());
+    }
+
+    public TraceLogAspect(final Logger logger) {
+        this.logger = logger;
+    }
 
     @Pointcut("within(org.maeno.example.controller..*)")
     public void packagePointcut() {
@@ -22,7 +30,7 @@ public class TraceLogAspect {
     }
 
     @Around("packagePointcut()")
-    public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
+    public Object around(final ProceedingJoinPoint joinPoint) throws Throwable {
 
         if (logger.isDebugEnabled()) {
             logger.debug("Enter: {}.{}() with argument[s] = {}",
