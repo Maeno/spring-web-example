@@ -23,19 +23,23 @@ public class TraceLogAspect {
 
     @Around("packagePointcut()")
     public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
+
         if (logger.isDebugEnabled()) {
             logger.debug("Enter: {}.{}() with argument[s] = {}",
                     joinPoint.getSignature().getDeclaringTypeName(),
                     joinPoint.getSignature().getName(),
                     Arrays.toString(joinPoint.getArgs()));
         }
+
         final Object proceed = joinPoint.proceed();
+
         if (logger.isDebugEnabled()) {
             logger.debug("Exit: {}.{}() with result = {}",
                     joinPoint.getSignature().getDeclaringTypeName(),
                     joinPoint.getSignature().getName(),
                     proceed);
         }
+
         return proceed;
     }
 }
