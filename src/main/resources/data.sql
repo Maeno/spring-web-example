@@ -1,0 +1,4 @@
+INSERT INTO ACCOUNT (USERNAME, EMAIL, PASSWORD)
+       VALUES
+           ('SCOTT', 'SCOTT@example.com', 'TIGER')
+       ON CONFLICT DO NOTHING;
