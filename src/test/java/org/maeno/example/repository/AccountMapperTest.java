@@ -1,22 +1,14 @@
 package org.maeno.example.repository;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.maeno.example.config.MyBatisConfiguration;
 import org.maeno.example.domain.Account;
+import org.maeno.example.test.DatabaseTestSupport;
+import org.maeno.example.test.TestDataSourceConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import javax.sql.DataSource;
-import java.util.Arrays;
 
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
@@ -25,36 +17,10 @@ import static org.junit.Assert.assertThat;
 @SpringBootTest(classes = {
         TestDataSourceConfig.class,
         MyBatisConfiguration.class})
-public class AccountMapperTest {
-
-    private JdbcTemplate jdbcTemplate;
-
-    @Autowired
-    public void setDatasource(DataSource datasource) {
-        jdbcTemplate = new JdbcTemplate(datasource);
-    }
+public class AccountMapperTest extends DatabaseTestSupport{
 
     @Autowired
     private AccountMapper sut;
-
-    @Before
-    public void setUp() throws Exception {
-        Arrays.asList(
-                "CREATE TABLE IF NOT EXISTS ACCOUNT  (" +
-                        "    ACCOUNTID INTEGER IDENTITY PRIMARY KEY," +
-                        "    USERNAME VARCHAR(20)," +
-                        "    EMAIL VARCHAR(20)," +
-                        "    PASSWORD VARCHAR(255) NOT NULL" +
-                        ");",
-                "INSERT INTO ACCOUNT (USERNAME, EMAIL, PASSWORD) VALUES ('SCOTT', 'SCOTT@example.com', 'TIGER');",
-                "INSERT INTO ACCOUNT (USERNAME, EMAIL, PASSWORD) VALUES ('FOO', 'bar@example.com', 'BAR');")
-                .forEach(s -> jdbcTemplate.execute(s));
-    }
-
-    @After
-    public void tearDown() throws Exception {
-        jdbcTemplate.execute("DROP TABLE ACCOUNT;");
-    }
 
     @Test
     public void testLoadAccountSuccess() throws Exception {
@@ -110,13 +76,3 @@ public class AccountMapperTest {
     }
 }
 
-@Configuration
-class TestDataSourceConfig {
-
-    @Bean
-    public DataSource datasource() throws ClassNotFoundException {
-        return new EmbeddedDatabaseBuilder()
-                .setType(EmbeddedDatabaseType.HSQL)
-                .build();
-    }
-}
