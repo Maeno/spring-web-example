@@ -1,8 +1,9 @@
 package org.maeno.example.controller;
 
+import org.maeno.example.security.dto.LoginUser;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -14,7 +15,7 @@ public class LoginController {
         return "login";
     }
 
-    @RequestMapping(value="/login", method = RequestMethod.GET)
+    @RequestMapping(value="/login")
     public ModelAndView login(@RequestParam(value = "error", required = false) String error,
                         @RequestParam(value = "logout", required = false) String logout) {
 
@@ -28,7 +29,7 @@ public class LoginController {
     }
 
     @RequestMapping("/main")
-    public String main() {
+    public String main(@AuthenticationPrincipal LoginUser loginUser) {
         return "main";
     }
 
