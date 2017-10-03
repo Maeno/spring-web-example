@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.maeno.example.repository.ProjectMapper">
+
+    <resultMap id="project" type="org.maeno.example.domain.Project">
+        <result column="ID" property="id" />
+        <result column="NAME" property="name" />
+        <result column="TYPE" property="type" typeHandler="org.apache.ibatis.type.EnumTypeHandler"/>
+        <result column="STARTDATE" property="startDate" />
+        <result column="VERSIONNO" property="versionNo" />
+    </resultMap>
+
+    <select id="list" resultMap="project">
+        <![CDATA[
+            SELECT
+                ID,
+                NAME,
+                TYPE,
+                STARTDATE,
+                VERSIONNO
+        FROM
+            PROJECT
+        ]]>
+    </select>
+</mapper>
