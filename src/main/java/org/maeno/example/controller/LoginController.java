@@ -1,14 +1,22 @@
 package org.maeno.example.controller;
 
+import org.maeno.example.domain.Project;
 import org.maeno.example.security.dto.LoginUser;
+import org.maeno.example.service.ProjectService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 @Controller
 public class LoginController {
+
+    @Autowired
+    private ProjectService projectService;
 
     @RequestMapping("/")
     public String index() {
@@ -29,8 +37,14 @@ public class LoginController {
     }
 
     @RequestMapping("/main")
-    public String main(@AuthenticationPrincipal LoginUser loginUser) {
-        return "main";
+    public ModelAndView main(@AuthenticationPrincipal LoginUser loginUser) {
+        final ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("main");
+
+        final List<Project> projectList = projectService.list();
+        modelAndView.addObject("projectList", projectList);
+
+        return modelAndView;
     }
 
 }
