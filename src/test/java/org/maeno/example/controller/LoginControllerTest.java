@@ -3,6 +3,9 @@ package org.maeno.example.controller;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.maeno.example.config.MyBatisConfiguration;
+import org.maeno.example.service.ProjectService;
+import org.maeno.example.test.TestDataSourceConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
@@ -17,7 +20,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(value = {LoginController.class})
+@WebMvcTest(value = {LoginController.class,
+        TestDataSourceConfig.class,
+        MyBatisConfiguration.class,
+        ProjectService.class})
 public class LoginControllerTest {
 
     @Autowired
