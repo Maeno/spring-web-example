@@ -31,7 +31,7 @@
                             <td data-th-text="${project.id}">1</td>
                             <td data-th-text="${project.name}">Iron Butterfly</td>
                             <td data-th-text="${project.type}">Triple Butter</td>
-                            <td data-th-text="${project.StartDate}">Triple Butter</td>
+                            <td data-th-text="${#dates.format(project.StartDate, 'yyyy/MM/dd')}">Triple Butter</td>
                         </tr>
                         </tbody>
                     </table>
