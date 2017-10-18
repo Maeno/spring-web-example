@@ -9,6 +9,8 @@
           rel="stylesheet" media="screen"/>
     <script src="http://cdn.jsdelivr.net/webjars/jquery/3.2.1/jquery.min.js"
             th:src="@{/webjars/jquery/3.2.1/jquery.min.js}"></script>
+    <script th:src="@{/js/main.js}"/>
+
 </head>
 <body>
 <div class="container">
@@ -35,7 +37,7 @@
                             <th class="col-sm-1">
                                 <div class="form-check">
                                     <label class="form-check-label">
-                                        <input class="form-check-input" type="checkbox" value=""/>
+                                        <input class="form-check-input" type="checkbox" value="" id="checkAll"/>
                                         Check All
                                     </label>
                                 </div>
@@ -50,7 +52,7 @@
                         <tr data-th-each="project : ${projectList}">
                             <td>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" />
+                                    <input class="form-check-input" type="checkbox" value="" th:id="'check_' + ${project.id}"/>
                                 </div>
                             </td>
                             <td data-th-text="${project.id}">1</td>
