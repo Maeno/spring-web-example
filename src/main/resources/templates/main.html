@@ -56,9 +56,26 @@
                                 </div>
                             </td>
                             <td data-th-text="${project.id}">1</td>
-                            <td data-th-text="${project.name}">Iron Butterfly</td>
-                            <td data-th-text="${project.type}">Triple Butter</td>
-                            <td data-th-text="${#dates.format(project.StartDate, 'yyyy/MM/dd')}">Triple Butter</td>
+                            <td>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" th:value="${project.name}"/>
+                                </div>
+                            </td>
+                            <td>
+                                <select class="selectpicker">
+                                    <option th:selected="${project.type.getProjectType() == 'PRIVATE'}">PRIVATE</option>
+                                    <option th:selected="${project.type.getProjectType() == 'PUBLIC'}">PUBLIC</option>
+                                    <option th:selected="${project.type.getProjectType() == 'PROTECTED'}">PROTECTED</option>
+                                </select>
+
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" th:value="${#dates.format(project.StartDate, 'yyyy/MM/dd')}"/>
+                                    </div>
+                                </div>
+                            </td>
                         </tr>
                         </tbody>
                     </table>
