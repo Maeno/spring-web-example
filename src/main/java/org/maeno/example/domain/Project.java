@@ -4,6 +4,8 @@ import java.util.Date;
 
 public class Project {
 
+    private Boolean checked = Boolean.FALSE;
+
     private Integer id;
 
     private String name;
@@ -13,6 +15,14 @@ public class Project {
     private Date startDate;
 
     private Long versionNo;
+
+    public Boolean getChecked() {
+        return checked;
+    }
+
+    public void setChecked(Boolean checked) {
+        this.checked = checked;
+    }
 
     public Integer getId() {
         return id;
