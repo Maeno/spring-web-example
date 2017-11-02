@@ -15,9 +15,6 @@ import java.util.List;
 @Controller
 public class LoginController {
 
-    @Autowired
-    private ProjectService projectService;
-
     @RequestMapping("/")
     public String index() {
         return "login";
@@ -32,17 +29,6 @@ public class LoginController {
         if (logout != null) {
             modelAndView.addObject("message", "Logged out successfully.");
         }
-
-        return modelAndView;
-    }
-
-    @RequestMapping("/main")
-    public ModelAndView main(@AuthenticationPrincipal LoginUser loginUser) {
-        final ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("main");
-
-        final List<Project> projectList = projectService.list();
-        modelAndView.addObject("projectList", projectList);
 
         return modelAndView;
     }

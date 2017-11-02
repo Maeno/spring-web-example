@@ -31,7 +31,7 @@
         <div class="row">
             <div class="main">
                 <h3>Project List</h3>
-                <form action="/edit" class="form-horizontal">
+                <form action="/edit" class="form-horizontal" th:action="@{/edit}" th:object="${form}" method="post">
                     <div class="btn-group" role="group">
                         <button type="submit" class="btn btn-labeled btn-danger" name="delete">
                             <span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>
@@ -57,17 +57,27 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr data-th-each="project : ${projectList}">
+                            <tr data-th-each="project, stat : ${projectList}">
                                 <td width="10%">
                                     <div class="form-check">
                                         <input class="form-check-input"
                                                type="checkbox"
-                                               value=""
+                                               th:name="${'projectList[' + stat.index + '].checked'}"
                                                th:id="'check_' + ${project.id}"
+                                               th:checked="${project.checked}"
                                         />
                                     </div>
                                 </td>
-                                <td data-th-text="${project.id}" width="5%">1</td>
+                                <td width="5%">
+                                    <div class="input-group">
+                                        <input type="text"
+                                               class="form-control"
+                                               th:name="${'projectList[' + stat.index + '].id'}"
+                                               th:value="${project.id}"
+                                               readonly="true"
+                                        />
+                                    </div>
+                                </td>
                                 <td width="40%">
                                     <div class="input-group">
                                         <input type="text"
