@@ -25,4 +25,20 @@
             PROJECT
         ]]>
     </select>
+
+    <select id="selectProjectByChecked" resultMap="project" parameterType="java.util.List">
+            SELECT
+                ID,
+                NAME,
+                TYPE,
+                STARTDATE,
+                VERSIONNO
+        FROM
+            PROJECT
+            WHERE
+                ID in
+        <foreach item="item" collection="list" open="(" separator="," close=")">
+          #{item, jdbcType=INTEGER}
+        </foreach>
+    </select>
 </mapper>

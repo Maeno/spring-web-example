@@ -9,4 +9,6 @@ import java.util.List;
 public interface ProjectMapper {
 
     List<Project> list();
+
+    List<Project> selectProjectByChecked(List<Integer> ids);
 }

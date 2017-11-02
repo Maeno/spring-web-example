@@ -33,7 +33,12 @@ public class ProjectController {
     @RequestMapping(value = "/edit")
     public ModelAndView edit(@ModelAttribute("form") ProjectForm form) {
         final ModelAndView modelAndView = new ModelAndView();
+        // TODO セッションに格納する
         modelAndView.setViewName("delete");
+
+        final List<Project> projectList = projectService.selectProjectByChecked(form.getProjectList());
+        modelAndView.addObject("deleteProjectList", projectList);
+
         return modelAndView;
     }
 }

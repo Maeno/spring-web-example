@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Project {
 
-    private Boolean checked;
+    private Boolean checked = Boolean.FALSE;
 
     private Integer id;
 
