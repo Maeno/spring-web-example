@@ -27,12 +27,12 @@
     </select>
 
     <select id="selectProjectByChecked" resultMap="project" parameterType="java.util.List">
-            SELECT
-                ID,
-                NAME,
-                TYPE,
-                STARTDATE,
-                VERSIONNO
+        SELECT
+            ID,
+            NAME,
+            TYPE,
+            STARTDATE,
+            VERSIONNO
         FROM
             PROJECT
             WHERE
@@ -41,4 +41,14 @@
           #{item, jdbcType=INTEGER}
         </foreach>
     </select>
+    <delete id="deleteProjectById" parameterType="java.util.List">
+        DELETE
+            FROM
+        PROJECT
+            WHERE
+        ID in
+        <foreach item="item" collection="list" open="(" separator="," close=")">
+            #{item, jdbcType=INTEGER}
+        </foreach>
+    </delete>
 </mapper>

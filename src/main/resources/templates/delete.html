@@ -16,14 +16,15 @@
     <div class="container-fluid">
         <div class="row">
             <div class="main">
-                <h3>Project List</h3>
-                <form action="/delete" class="form-horizontal">
+                <h3>Deletion Checking.</h3>
+                <form action="/delete" class="form-horizontal" method="post">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
                     <div class="btn-group" role="group">
                         <button type="submit" class="btn btn-labeled btn-danger btn-space" name="delete">
                             <span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>
                             Delete
                         </button>
-                        <button type="button" class="btn btn-labeled btn-danger btn-space">
+                        <button type="submit" class="btn btn-labeled btn-danger btn-space" name="cancel">
                             <span class="btn-label"><i class="glyphicon glyphicon-remove"></i></span>Cancel
                         </button>
                     </div>

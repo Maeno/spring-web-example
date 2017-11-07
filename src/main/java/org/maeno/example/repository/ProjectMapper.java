@@ -11,4 +11,6 @@ public interface ProjectMapper {
     List<Project> list();
 
     List<Project> selectProjectByChecked(List<Integer> ids);
+
+    boolean deleteProjectById(List<Integer> ids);
 }

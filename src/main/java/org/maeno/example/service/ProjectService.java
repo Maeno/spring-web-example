@@ -18,11 +18,21 @@ public class ProjectService {
         return projectMapper.list();
     }
 
-    public List<Project> selectProjectByChecked(ArrayList<Project> projectList) {
-        final List<Integer> ids = new ArrayList<>();
-                projectList.stream()
-                        .filter(project -> project.getChecked())
-                        .forEach(project -> ids.add(project.getId()));
+    public List<Project> selectProject(ArrayList<Project> projectList) {
+        final List<Integer> ids = getIds(projectList);
         return projectMapper.selectProjectByChecked(ids);
+    }
+
+    private List<Integer> getIds(ArrayList<Project> projectList) {
+        final List<Integer> ids = new ArrayList<>();
+        projectList.stream()
+                .filter(project -> project.getChecked())
+                .forEach(project -> ids.add(project.getId()));
+        return ids;
+    }
+
+    public boolean deleteProject(ArrayList<Project> projectList) {
+        final List<Integer> ids = getIds(projectList);
+        return projectMapper.deleteProjectById(ids);
     }
 }

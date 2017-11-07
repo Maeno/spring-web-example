@@ -17,7 +17,7 @@ $(function(){
         $(tr).find('[type="text"],select').prop('disabled', !checked)
     })
 
-    $('#delete').on('click', function () {
+    $('#deleteCheck').on('click', function () {
         if ($('[id^="check_"]:checked').length === 0) {
             alert('You must choice some data.')
             return false
