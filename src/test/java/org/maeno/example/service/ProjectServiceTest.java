@@ -28,7 +28,7 @@ public class ProjectServiceTest extends DatabaseTestSupport{
 
     @Test
     public void list() throws Exception {
-        final List<Project> list = sut.list();
+        final List<Project> list = sut.selectProject();
         assertThat(list, is(notNullValue()));
     }
 }

@@ -2,8 +2,11 @@ $(function(){
     var PATTERN_CHECKBOX_ID = '[id^="check_"]'
     var EVENT_CHANGE = 'change'
 
-    $('#checkAll').on(EVENT_CHANGE, function() {
+    $(PATTERN_CHECKBOX_ID).each(function () {
+        toggleEditMode(this)
+    })
 
+    $('#checkAll').on(EVENT_CHANGE, function() {
         if (this.checked) {
             toggleCheckBox(PATTERN_CHECKBOX_ID, true)
         } else {
@@ -12,9 +15,7 @@ $(function(){
     })
 
     $(PATTERN_CHECKBOX_ID).on(EVENT_CHANGE, function() {
-        var checked = $(this).prop('checked')
-        var tr = $(this).closest('tr')
-        $(tr).find('[type="text"],select').prop('disabled', !checked)
+        toggleEditMode(this)
     })
 
     $('#deleteCheck').on('click', function () {
@@ -31,3 +32,8 @@ function toggleCheckBox (id, flag) {
     $(id).prop('checked', flag).change()
 }
 
+function toggleEditMode (elem) {
+    var checked = $(elem).prop('checked')
+    var tr = $(elem).closest('tr')
+    $(tr).find('[type="text"],select').prop('disabled', !checked)
+}

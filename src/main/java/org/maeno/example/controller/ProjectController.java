@@ -1,6 +1,7 @@
 package org.maeno.example.controller;
 
 import org.maeno.example.domain.Project;
+import org.maeno.example.exception.AppRuntimeException;
 import org.maeno.example.form.ProjectForm;
 import org.maeno.example.security.dto.LoginUser;
 import org.maeno.example.service.ProjectService;
@@ -29,7 +30,7 @@ public class ProjectController {
         final ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("main");
 
-        final List<Project> projectList = projectService.list();
+        final List<Project> projectList = projectService.selectProject();
         modelAndView.addObject("projectList", projectList);
 
         return modelAndView;
@@ -56,7 +57,7 @@ public class ProjectController {
         if (isSuccess) {
             return main(loginUser);
         }
-        return null;
+        throw new AppRuntimeException("error occurred during deletion");
     }
 
     @RequestMapping(value="/delete", params = "cancel")
@@ -65,7 +66,17 @@ public class ProjectController {
         modelAndView.setViewName("main");
 
         ProjectForm projectForm = (ProjectForm) session.getAttribute("target");
-        final List<Project> projectList = projectService.selectProject(projectForm.getProjectList());
+        final List<Project> projectList = projectService.selectProject();
+
+        projectForm.getProjectList().stream().forEach(project -> {
+            if (project.getChecked()) {
+                projectList.forEach(newProject -> {
+                    if (newProject.getId().equals(project.getId())) {
+                        newProject.setChecked(true);
+                    }
+                });
+            }
+        });
 
         modelAndView.addObject("projectList", projectList);
         return modelAndView;
