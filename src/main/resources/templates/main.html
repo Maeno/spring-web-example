@@ -51,10 +51,10 @@
                                         </label>
                                     </div>
                                 </th>
-                                <th width="5%">Id</th>
-                                <th width="40%">Name</th>
-                                <th width="30%">Type</th>
-                                <th width="15%">StartDate</th>
+                                <th width="10%">Id</th>
+                                <th width="25%">Name</th>
+                                <th width="25%">Type</th>
+                                <th width="25%">StartDate</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -69,7 +69,7 @@
                                         />
                                     </div>
                                 </td>
-                                <td width="5%">
+                                <td width="10%">
                                     <div class="input-group">
                                         <input type="text"
                                                class="form-control"
@@ -79,7 +79,7 @@
                                         />
                                     </div>
                                 </td>
-                                <td width="40%">
+                                <td width="25%">
                                     <div class="input-group">
                                         <input type="text"
                                                class="form-control"
@@ -88,7 +88,7 @@
                                         />
                                     </div>
                                 </td>
-                                <td width="30%">
+                                <td width="25%">
                                     <select class="selectpicker" disabled="true">
                                         <option th:selected="${project.type.getProjectType() == 'PRIVATE'}">PRIVATE
                                         </option>
@@ -100,15 +100,13 @@
                                     </select>
 
                                 </td>
-                                <td width="15%">
-                                    <div class="form-group">
-                                        <div class="input-group">
-                                            <input type="text"
-                                                   class="form-control"
-                                                   th:value="${#dates.format(project.StartDate, 'yyyy/MM/dd')}"
-                                                   disabled="true"
-                                            />
-                                        </div>
+                                <td width="25%">
+                                    <div class="input-group">
+                                        <input type="text"
+                                               class="form-control"
+                                               th:value="${#dates.format(project.StartDate, 'yyyy/MM/dd')}"
+                                               disabled="true"
+                                        />
                                     </div>
                                 </td>
                             </tr>
