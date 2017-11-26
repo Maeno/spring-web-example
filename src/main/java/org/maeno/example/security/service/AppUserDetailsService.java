@@ -20,13 +20,17 @@ public class AppUserDetailsService implements UserDetailsService{
         this.accountMapper = accountMapper;
     }
 
-    @Override
-    public UserDetails loadUserByUsername(String searchKey) throws UsernameNotFoundException {
-        final Account account = accountMapper.loadAccount(searchKey);
+    public UserDetails loadUserByKey(String searchKey, final String password) throws UsernameNotFoundException {
+        final Account account = accountMapper.auth(searchKey, password);
 
         if (StringUtils.isEmpty(account)) {
             throw new UsernameNotFoundException("could not find the account.");
         }
         return new LoginUser(account);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return null;
     }
 }

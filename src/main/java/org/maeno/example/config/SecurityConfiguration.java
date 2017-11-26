@@ -1,7 +1,6 @@
 package org.maeno.example.config;
 
 import org.maeno.example.security.AppAuthenticationProvider;
-import org.maeno.example.security.service.AppUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -15,17 +14,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private AppAuthenticationProvider authenticationProvider;
 
-    private AppUserDetailsService userDetailsService;
-
     @Autowired
-    public SecurityConfiguration(AppAuthenticationProvider authenticationProvider,
-                                 AppUserDetailsService userDetailsService) {
+    public SecurityConfiguration(AppAuthenticationProvider authenticationProvider) {
         this.authenticationProvider = authenticationProvider;
-        this.userDetailsService = userDetailsService;
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        // @formatter:off
         http
             .authorizeRequests()
                 .antMatchers(
@@ -49,11 +45,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .invalidateHttpSession(true)
                 .deleteCookies("JSESSIONID")
                 .permitAll();
+        // @formatter:on
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.authenticationProvider(authenticationProvider)
-            .userDetailsService(userDetailsService);
+        auth.authenticationProvider(authenticationProvider);
     }
 }

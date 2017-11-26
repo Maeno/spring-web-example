@@ -20,7 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(value = {LoginController.class,
+@WebMvcTest(value = {AuthController.class,
         TestDataSourceConfig.class,
         MyBatisConfiguration.class,
         ProjectService.class})
